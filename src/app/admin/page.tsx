@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function AdminPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [nombre, setNombre] = useState("");
@@ -10,7 +12,7 @@ export default function AdminPage() {
   const [descripcion, setDescripcion] = useState("");
 
   async function loadProducts() {
-    const res = await fetch("http://localhost:3001/api/products");
+    const res = await fetch(`${API_URL}/api/products`);
     const data = await res.json();
     setProducts(data);
   }
@@ -18,7 +20,7 @@ export default function AdminPage() {
   async function createProduct(e: React.FormEvent) {
     e.preventDefault();
 
-    await fetch("http://localhost:3001/api/products", {
+    await fetch(`${API_URL}/api/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +39,7 @@ export default function AdminPage() {
   }
 
   async function deleteProduct(id: number) {
-    await fetch(`http://localhost:3001/api/products/${id}`, {
+    await fetch(`${API_URL}/api/products/${id}`, {
       method: "DELETE",
     });
 
