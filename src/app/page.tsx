@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Product } from "@/types/product";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 async function getProducts(): Promise<Product[]> {
-  const res = await fetch("http://localhost:3001/api/products", {
+  const res = await fetch(`${API_URL}/api/products`, {
     cache: "no-store",
   });
 
